@@ -1,17 +1,3 @@
-# 📝 MERN Blog App
-
-A full-stack blog application built with the MERN stack (MongoDB, Express.js, React, Node.js). This app allows users to create, read, update, and delete blog posts with image support and author information.
-
-## 🔗 Live Demo
-
-[Coming Soon]
-
-## 👨‍💻 Author
-
-GitHub: [@dpk763](https://github.com/dpk763)
-
----
-
 ## 🚀 Features
 
 - Create and publish blog posts
@@ -97,20 +83,4 @@ PORT=5000
 JWT_SECRET=your_jwt_secret
 ```
 
----
 
-## 📸 Screenshots
-
-*(Add screenshots here of your home page, create post page, etc.)*
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-## 🙌 Support
-
-If you like this project, leave a ⭐ on the [GitHub repository](https://github.com/dpk763)!

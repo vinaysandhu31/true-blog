@@ -11,7 +11,7 @@ export default function Navbar() {
 
   return (
     <nav style={styles.navbar}>
-      <Link to="/" style={styles.logo}>Blog App</Link>
+      <Link to="/" style={styles.logo}>True Blog </Link>
 
       <div style={styles.links}>
         {user ? (
