@@ -28,7 +28,7 @@ const Footer = () => {
             <a href="https://x.com" className="hover:text-blue-500">
               <i className="fab fa-twitter mr-2"></i> Twitter
             </a>
-            <a href="https://Linkedin.com/Vinay Sandhu" className="hover:text-blue-600">
+            <a href="https://Linkedin.com/VinaySandhu" className="hover:text-blue-600">
               <i className="fab fa-linkedin mr-2"></i> LinkedIn
             </a>
             <a href="https://Instagram.com/sandhuvinay_31" className="hover:text-pink-500">

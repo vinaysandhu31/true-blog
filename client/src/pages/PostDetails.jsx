@@ -19,7 +19,7 @@ export default function PostDetails() {
   return (
    <div className="container my-4">
      <div className="card">
-        <img style={styles.img} src={post.image} className="card-img-top" alt="..."/>
+        <img style={styles.img} src={post.image} className="card-img-top" alt="Sorry for inconvinence"/>
           <div className="card-body">
             <h5 className="card-title">{post.title}</h5>
             <p className="card-text">{post.content}</p>
@@ -45,7 +45,10 @@ const styles = {
     transition: 'background-color 0.3s ease',
   },
   img:{
-    height:'300px',
+    height:'100%',
+    width:'100%',
+    maxHeight:'400px',
+    maxWidth:'100%',
     objectFit:'cover'
   }
 };
