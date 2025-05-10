@@ -7,6 +7,7 @@ import PostDetails from './pages/PostDetails';
 import EditPost from './pages/EditPost';
 import Login from './pages/Login';
 import Register from './pages/Register';
+ import Footer from './pages/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
@@ -20,7 +21,9 @@ function App() {
         <Route path="/edit/:id" element={<EditPost/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
+       
       </Routes>
+      <Footer />
     </Router>
   );
 }
