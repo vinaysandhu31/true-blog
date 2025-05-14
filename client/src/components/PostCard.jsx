@@ -4,12 +4,12 @@ export default function PostCard({ post }) {
   return (
    
       <div className="col-sm-3 my-2">
-        <div class="card" style={{width: "17rem"}}>
-        <img style={styles.img} src={post.image} class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">{post.title}</h5>
-          <p class="card-text">By {post.author?.username}</p>
-          <p class="card-text">{post.content.substring(0, 100)}...</p>
+        <div className="card" style={{width: "17rem"}}>
+        <img style={styles.img} src={post.image} className="card-img-top" alt="..." />
+        <div className="card-body">
+          <h5 className="card-title">{post.title}</h5>
+          <p className="card-text">By {post.author?.username}</p>
+          <p className="card-text">{post.content.substring(0, 100)}...</p>
           <Link to={`/post/${post._id}`} style={styles.readMoreLink}>Read More</Link>
         </div>
       </div>

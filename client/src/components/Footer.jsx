@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
         
         {/* About Section */}
-        <div class="about">
+        <div className="about">
           <h3 className="text-xl font-semibold mb-2">About</h3>
           <p className="text-black-400 text-sm">
            Welcome to Vinay's blog – a place where ideas, tech tips, and stories come together. Stay tuned for weekly updates!
