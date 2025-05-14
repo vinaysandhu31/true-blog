@@ -1,21 +1,53 @@
+import { Link } from "react-router-dom";
+import CallToAction from "../components/CallToAction";
+import { useEffect, useState } from "react";
+import PostCard from "../components/PostCard";
 
-import { useEffect, useState } from 'react';
-import { getPosts } from '../services/api';
-import PostCard from '../components/PostCard';
-import Footer from '../components/Footer'
 export default function Home() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    getPosts().then(res => setPosts(res.data));
+    const fetchPosts = async () => {
+      const res = await fetch("/api/post/getPosts");
+      const data = await res.json();
+      setPosts(data.posts);
+    };
+    fetchPosts();
   }, []);
 
   return (
-    <div className="container">
-      <div className='row'>
-        {posts.map(post => <PostCard key={post._id} post={post} />)}
+    <div>
+      <div className="flex flex-col gap-6 p-10 px-3 max-w-6xl  mx-auto">
+        <h1 className="text-3xl font-bold lg:text-6xl">Welcome to My Blog</h1>
+        <p className="text-gray-500 text-xs sm:text-sm">
+          Discover insightful articles, coding tutorials, and personal thoughts on web development, tech trends, and productivity. Whether you're a beginner or a seasoned developer, there's something here for you to learn and explore.
+        </p>
+
+        <Link
+          to="/search"
+          className="text-xs sm:text-sm text-teal-500 font-bold hover:underline"
+        >
+          View all posts...
+        </Link>
       </div>
-      <Footer/>
+      <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 py-7">
+        {posts && posts.length > 0 && (
+          <div className="flex flex-col gap-6 mx-auto">
+            <h2 className="text-2xl font-semibold text-center">Recent Posts</h2>
+            <div className="flex flex-wrap justify-center gap-4">
+              {posts.map((post) => (
+                <PostCard key={post._id} post={post} />
+              ))}
+            </div>
+            <Link
+              to={"/search"}
+              className="text-lg text-teal-500 hover:underline text-center"
+            >
+              View all posts
+            </Link>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

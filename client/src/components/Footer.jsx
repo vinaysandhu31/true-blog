@@ -1,49 +1,67 @@
-import React from 'react';
+import { Footer, FooterDivider } from "flowbite-react";
+import { Link } from "react-router-dom";
+import { BsFacebook, BsInstagram, BsTwitter, BsGithub, BsWhatsapp } from "react-icons/bs";
 
-const Footer = () => {
+export default function FooterComp() {
   return (
-    <footer className="bg-gray-900 text-black py-8">
-      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
-        
-        {/* About Section */}
-        <div className="about">
-          <h3 className="text-xl font-semibold mb-2">About</h3>
-          <p className="text-black-400 text-sm">
-           Welcome to Vinay's blog – a place where ideas, tech tips, and stories come together. Stay tuned for weekly updates!
-          </p>
-        </div>
-
-        {/* Quick Links */}
-        <div>
-          <h3 className="text-xl font-semibold mb-2">Quick Links</h3>
-          <ul className="flex flex-wrap gap-4 text-gray-400 text-sm">
-            <li><a href="https://wa.me/918814884420" target="_blank" rel="noopener noreferrer">Chat with me on WhatsApp</a></li>
-          </ul>
-        </div>
-
-        {/* Social Media */}
-        <div>
-          <h3 className="text-xl font-semibold mb-2">Follow Me</h3>
-          <div className="flex flex-col space-y-2 text-gray-400 text-sm">
-            <a href="https://x.com" className="hover:text-blue-500">
-              <i className="fab fa-twitter mr-2"></i> Twitter
-            </a>
-            <a href="https://Linkedin.com/VinaySandhu" className="hover:text-blue-600">
-              <i className="fab fa-linkedin mr-2"></i> LinkedIn
-            </a>
-            <a href="https://Instagram.com/sandhuvinay_31" className="hover:text-pink-500">
-              <i className="fa-instagram"></i> Instagram
-            </a>
+    <Footer container className="border border-t-8 border-teal-500">
+      <div className="w-full max-w-7xl mx-auto">
+        <div className="grid w-full justify-between sm:flex md:grid-col-1">
+          <div className="mt-5">
+            <Link
+              to="/"
+              className="self-centered whitespace-nowrap text-lg sm:text-xl font-semibold dark:text-white"
+            >
+              <span className="px-2 bg-black py-1 rounded-lg text-white">
+                TrueBlog
+              </span>
+              
+            </Link>
           </div>
+          <div className="grid grid-cols-2 gap-8 mt-4 sm:grid-cols-3 sm:gap-6">
+            <div>
+              <Footer.Title title="About" />
+              <Footer.LinkGroup col>
+                <span className="text-gray-500 dark:text-gray-400">
+                  Project
+                </span>
+                <span className="text-gray-500 dark:text-gray-400">
+                  TrueBlog
+                </span>
+              </Footer.LinkGroup>
+            </div>
 
+            <div>
+              <Footer.Title title="Follow Us" />
+              <Footer.LinkGroup col>
+                <span className="text-gray-500 dark:text-gray-400">Github</span>
+                <span className="text-gray-500 dark:text-gray-400">Discord</span>
+              </Footer.LinkGroup>
+            </div>
+            <div>
+              <Footer.Title title="LEGAL" />
+              <Footer.LinkGroup col>
+                <span className="text-gray-500 dark:text-gray-400">Privacy Policy</span>
+                <span className="text-gray-500 dark:text-gray-400">Terms &amp; Conditions</span>
+              </Footer.LinkGroup>
+            </div>
+          </div>
+        </div>
+        <FooterDivider />
+        <div className="w-full sm:flex sm:items-center sm:justify-between">
+          <Footer.Copyright
+            by="TrueBlog"
+            year={new Date().getUTCFullYear()}
+          />
+          <div className="flex gap-6 sm:mt-0 mt-4 sm:justify-center">
+            <BsFacebook className="text-xl cursor-pointer" />
+            <BsInstagram className="text-xl cursor-pointer" />
+            <BsTwitter className="text-xl cursor-pointer" />
+            <BsGithub className="text-xl cursor-pointer" />
+            <BsWhatsapp className="text-xl cursor-pointer" />
+          </div>
         </div>
       </div>
-
-      <div className="mt-8 text-center text-sm text-gray-500 border-t border-gray-700 pt-4">
-        © 2025 Vinay's Blog. All rights reserved.
-      </div>
-    </footer>
+    </Footer>
   );
-};
-
-export default Footer;
+}

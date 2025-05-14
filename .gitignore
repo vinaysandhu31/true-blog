@@ -1,3 +1,8 @@
+notes
+
+api/node_modules
+api/.gitignore
+
 # Logs
 logs
 *.log
@@ -23,6 +28,4 @@ dist-ssr
 *.sln
 *.sw?
 
-
-# Contentlayer
-.contentlayer
+index copy.js

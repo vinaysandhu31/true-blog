@@ -1,28 +1,49 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+// import Projects from "./pages/Projects";
+import SignOut from "./pages/SignOut";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import PrivateRoute from "./components/PrivateRoute";
+import Dashboard from "./pages/Dashbord";
+import OnlyAdminPrivateRoute from "./components/OnlyAdminPrivateRoute";
+import CreatePost from "./pages/CreatePost";
+import UpdatePost from "./pages/UpdatePost";
+import PostPage from "./pages/PostPage";
+import ScrollToTop from "./components/ScrollToTop";
+import Search from "./pages/Search";
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Navbar from './components/Navbar';
-import CreatePost from './pages/CreatePost';
-import PostDetails from './pages/PostDetails';
-import EditPost from './pages/EditPost';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import 'bootstrap/dist/css/bootstrap.min.css'
 
-function App() {
+
+export default function App() {
   return (
-    <Router>
-      <Navbar />
+    <BrowserRouter>
+    <ScrollToTop />
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/create" element={<CreatePost/>} />
-        <Route path="/post/:id" element={<PostDetails/>} />
-        <Route path="/edit/:id" element={<EditPost/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
+        <Route path="/about" element={<About />} />
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/search" element={<Search />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+        <Route element={<OnlyAdminPrivateRoute />}>
+          <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/update-post/:postId" element={<UpdatePost />} />
+        </Route>
+
+        {/* <Route path="/projects" element={<Projects />} /> */}
+        <Route path="/post/:postSlug" element={<PostPage />} />
+        <Route path="/sign-out" element={<SignOut />} />
       </Routes>
-    </Router>
+      <Footer />
+    </BrowserRouter>
   );
 }
 
-export default App;
+Route;

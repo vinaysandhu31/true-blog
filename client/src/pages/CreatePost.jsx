@@ -1,118 +1,96 @@
-import { useState } from 'react';
-import { createPost } from '../services/api';
-import { useNavigate } from 'react-router-dom';
+import { Alert, Button, Select, TextInput } from "flowbite-react";
+import { useState } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import { useNavigate } from "react-router-dom";
 
 export default function CreatePost() {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [image, setImage] = useState('');
+  const [formData, setFormData] = useState({});
+  const [publishError, setPublishError] = useState(null);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await fetch("/api/post", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include", // ✅ Important to send cookie for auth
+      body: JSON.stringify(formData),
+    });
 
-    // Get username from localStorage
-    const storedData = JSON.parse(localStorage.getItem('user'));
-    const userId = storedData?.user?.id;
-    const username = storedData?.user?.username;
-
-    if (!username || !userId) {
-      alert('User not logged in.');
+    const data = await res.json();
+    if (!res.ok) {
+      setPublishError(data.message);
       return;
     }
 
-    const author = {
-      _id: userId,
-      username: username,
-    };
+    setPublishError(null);
+    navigate(`/post/${data.slug}`);
+  } catch (error) {
+    setPublishError("Something went wrong");
+  }
+};
 
-    try {
-      await createPost({ title, content, image, author });
-      navigate('/');
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   return (
-    <div style={styles.container}>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <h2 style={styles.heading}>Create New Post</h2>
-        <input
-          type="text"
-          placeholder="Enter post title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          style={styles.input}
+    <div className="p-3 max-w-3xl mx-auto min-h-screen">
+      <h1 className="text-center text-3xl my-7 font-semibold">Create new post</h1>
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+        <div className="flex flex-col gap-4 sm:flex-row justify-between">
+          <TextInput
+            type="text"
+            placeholder="Title"
+            required
+            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+          />
+          <Select
+            onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+          >
+            <option value="uncategorized">Select a category</option>
+            <option value="javascript">JavaScript</option>
+            <option value="reactjs">React.js</option>
+            <option value="nextjs">Next.js</option>
+            <option value="python">Python</option>
+            <option value="django">Django</option>
+          </Select>
+        </div>
+
+        {/* 🔁 Replace FileInput with Image URL Input */}
+        <TextInput
+          type="url"
+          placeholder="Image URL (e.g., https://...)"
+          onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+        />
+
+        {formData.image && (
+          <img
+            src={formData.image}
+            alt="preview"
+            className="w-full h-72 object-cover"
+          />
+        )}
+
+        <ReactQuill
+          theme="snow"
+          placeholder="What is on your mind?"
+          className="h-72 mb-12"
           required
+          onChange={(value) => setFormData({ ...formData, content: value })}
         />
-        <input
-          type="text"
-          placeholder="Enter image URL"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-          style={styles.input}
-        />
-        <textarea
-          placeholder="Enter post content"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          style={styles.textarea}
-          required
-        />
-        <button type="submit" style={styles.button}>Publish</button>
+
+        <Button type="submit" gradientDuoTone="purpleToPink">
+          Publish
+        </Button>
+
+        {publishError && (
+          <Alert className="mt-5" color="failure">
+            {publishError}
+          </Alert>
+        )}
       </form>
     </div>
   );
 }
-
-const styles = {
-  container: {
-    minHeight: '80vh',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f7f7f7',
-    padding: '20px',
-  },
-  form: {
-    backgroundColor: 'white',
-    padding: '30px',
-    borderRadius: '8px',
-    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-    display: 'flex',
-    flexDirection: 'column',
-    width: '400px',
-    gap: '15px',
-  },
-  heading: {
-    marginBottom: '10px',
-    textAlign: 'center',
-    color: '#333',
-  },
-  input: {
-    padding: '10px',
-    fontSize: '16px',
-    borderRadius: '5px',
-    border: '1px solid #ccc',
-  },
-  textarea: {
-    padding: '10px',
-    fontSize: '16px',
-    borderRadius: '5px',
-    border: '1px solid #ccc',
-    minHeight: '150px',
-    resize: 'vertical',
-  },
-  button: {
-    padding: '10px',
-    backgroundColor: '#4CAF50',
-    color: 'white',
-    fontSize: '16px',
-    fontWeight: 'bold',
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s ease',
-  }
-};
