@@ -34,7 +34,10 @@ export default function FooterComp() {
             <div>
               <Footer.Title title="Follow Us" />
               <Footer.LinkGroup col>
+                <a href="https://github.com/vinaysandhu31" target="_blank" rel="noopener noreferrer">
+                </a>
                 <span className="text-gray-500 dark:text-gray-400">Github</span>
+                </a>
                 <span className="text-gray-500 dark:text-gray-400">Discord</span>
               </Footer.LinkGroup>
             </div>
@@ -55,10 +58,16 @@ export default function FooterComp() {
           />
           <div className="flex gap-6 sm:mt-0 mt-4 sm:justify-center">
             <BsFacebook className="text-xl cursor-pointer" />
+             <a href="https://instagram.com/sandhuvinay_31" target="_blank" rel="noopener noreferrer">
             <BsInstagram className="text-xl cursor-pointer" />
+            </a>
             <BsTwitter className="text-xl cursor-pointer" />
+             <a href="https://github.com/vinaysandhu31" target="_blank" rel="noopener noreferrer">
             <BsGithub className="text-xl cursor-pointer" />
+            </a>
+             <a href="https://wa.me/918814884420" target="_blank" rel="noopener noreferrer">
             <BsWhatsapp className="text-xl cursor-pointer" />
+            </a>
           </div>
         </div>
       </div>
