@@ -35,7 +35,6 @@ export default function FooterComp() {
               <Footer.Title title="Follow Us" />
               <Footer.LinkGroup col>
                 <a href="https://github.com/vinaysandhu31" target="_blank" rel="noopener noreferrer">
-                </a>
                 <span className="text-gray-500 dark:text-gray-400">Github</span>
                 </a>
                 <span className="text-gray-500 dark:text-gray-400">Discord</span>
